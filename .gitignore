@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+
+# VisualStudio
+*.VC.db
+*.VC.opendb
+*.ipch
+
+
