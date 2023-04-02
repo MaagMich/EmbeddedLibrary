@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="include\EmbeddedMessageProtocol\Message.h" />
+    <ClInclude Include="include\EmbeddedMessageProtocol\Protocol.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EmbeddedMessageProtocol.cpp" />

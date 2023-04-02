@@ -21,6 +21,9 @@
     <ClInclude Include="include\EmbeddedMessageProtocol\Message.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="include\EmbeddedMessageProtocol\Protocol.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EmbeddedMessageProtocol.cpp">
