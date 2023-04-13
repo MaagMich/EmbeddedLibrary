@@ -34,7 +34,17 @@
 
 # VisualStudio
 *.VC.db
+*.VC.db*
 *.VC.opendb
 *.ipch
+
+# Debug Stuff
+Debug/*
+*/Debug/*
+*.log
+*.tlog
+
+# Testing
+packages/*
 
 
