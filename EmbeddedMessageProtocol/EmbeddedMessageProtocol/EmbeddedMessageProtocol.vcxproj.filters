@@ -24,6 +24,18 @@
     <ClInclude Include="include\EmbeddedMessageProtocol\Protocol.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="include\EmbeddedMessageProtocol\Protocol_Plain.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmbeddedMessageProtocol\InputBuffer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmbeddedMessageProtocol\Protocol_Header_Start.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmbeddedMessageProtocol\Protocol_Header_Encapsulated.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EmbeddedMessageProtocol.cpp">

@@ -2,10 +2,11 @@
 #define H_EMBEDDEDMESSAGEPROTOCOL_PROTOCOL
 
 #include <string>
-#include <list>
 #include <memory>
 #include <functional>
+#include <optional>
 
+#include "InputBuffer.h"
 #include "Message.h"
 
 
@@ -17,28 +18,42 @@ using receive_callback = std::function<void(std::shared_ptr<Message>)>;
 class Protocol
 {
 public:
-	inline Protocol(receive_callback receive_callback)
-		: receive_callback_(receive_callback)
+	inline Protocol(
+		receive_callback receive_callback,
+		std::unique_ptr<InputBuffer> input_buffer
+	)
+		: receive_callback_(receive_callback),
+		input_buffer_(std::move(input_buffer)),
+		message_count_(0)
 		{};
 
-	inline void pushInput(const std::list<char> input, const bool translate = true);
+	inline void pushInput(const std::string input, const bool translate = true);
 	virtual void translateInput() = 0;
 
 	virtual std::string translateMessage(const std::shared_ptr<Message> message) = 0;
 
+	inline auto getMessageCount() const
+		{ return this->message_count_; };
+
+protected:
+	virtual std::shared_ptr<Message> createMessage(const std::string message_string) = 0;
+
+	inline bool invokeReceive(std::shared_ptr<Message> message) const;
+
+protected:
+	std::unique_ptr<InputBuffer> input_buffer_;
+
 private:
-	std::string header_start_;
-	std::string header_end_;
-	std::list<char> input_buffer_;
 	receive_callback receive_callback_;
+	size_t message_count_;
 
 };
 
 
 
-inline void Protocol::pushInput(const std::list<char> input, const bool translate)
+inline void Protocol::pushInput(const std::string input, const bool translate)
 {
-	this->input_buffer_.insert(this->input_buffer_.end(), input.begin(), input.end());
+	this->input_buffer_->pushInput(input);
 
 	if (translate)
 	{
@@ -47,7 +62,20 @@ inline void Protocol::pushInput(const std::list<char> input, const bool translat
 }
 
 
+inline bool Protocol::invokeReceive(std::shared_ptr<Message> message) const
+{
+	bool result = false;
 
+
+	if (this->receive_callback_ && message)
+	{
+		this->receive_callback_(message);
+
+		result = true;
+	}
+
+	return result;
+}
 
 }	// namespace message_protocol
 
