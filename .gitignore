@@ -39,12 +39,13 @@
 *.ipch
 
 # Debug Stuff
-Debug/*
+Debug*
 */Debug/*
 *.log
 *.tlog
+build*
 
 # Testing
-packages/*
-
+packages*
+gtest*
 
